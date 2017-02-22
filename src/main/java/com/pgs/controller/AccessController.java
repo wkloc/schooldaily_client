@@ -23,10 +23,21 @@ public class AccessController {
         return forObject;
     }
 
+    @RequestMapping(value = "/user2")
+    public JsonNode getProtectedResource2() {
+        JsonNode forObject = restTemplate.getForObject("https://localhost:8443/secure/user2", JsonNode.class);
+        return forObject;
+    }
+
     @RequestMapping(value = "/kraj", method = RequestMethod.GET)
     @ResponseBody
     public String kraj() {
         return restTemplate.getForObject("https://localhost:8443/secure/country", String.class);
+    }
+
+    @RequestMapping(value = "/facebook", method = RequestMethod.GET)
+    public String facebookString() {
+        return restTemplate.getForObject("https://localhost:8443/secure/facebook", String.class);
     }
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
