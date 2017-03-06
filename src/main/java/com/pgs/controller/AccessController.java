@@ -45,5 +45,10 @@ public class AccessController {
     public String hello() {
         return "Hello from unprotected endpoint!";
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout() {
+        return restTemplate.getForObject("https://localhost:8443/oauth/logout", String.class);
+    }
 }
 
