@@ -1,12 +1,16 @@
 package com.pgs.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by mmalek on 2/16/2017.
@@ -47,8 +51,17 @@ public class AccessController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout() {
-        return restTemplate.getForObject("https://localhost:8443/oauth/logout", String.class);
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+
+        String ret = restTemplate.getForObject("https://localhost:8443/oauth/logout", String.class);
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            cookie.setMaxAge(0);
+            cookie.setValue(null);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+        }
+        return ret;
     }
 }
 
