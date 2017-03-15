@@ -1,4 +1,7 @@
 spring:
+  cloud:
+    config:
+        uri: https://localhost:8440
   application:
     name: schooldaily_client
   profiles:
