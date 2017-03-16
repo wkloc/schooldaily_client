@@ -5,4 +5,4 @@ spring:
   application:
     name: schooldaily_client
   profiles:
-    active: default
+    active: ${activeprofile}
