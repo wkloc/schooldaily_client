@@ -2,6 +2,8 @@ spring:
   cloud:
     config:
         uri: https://localhost:8440
+        username: cloudserveruser
+        password: cloudserverpassword
   application:
     name: schooldaily_client
   profiles:
