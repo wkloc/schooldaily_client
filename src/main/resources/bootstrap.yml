@@ -1,10 +1,11 @@
+# to switch profile run with: -Dspring.profiles.active=prod
 spring:
-  cloud:
-    config:
-        uri: https://localhost:8440
-        username: cloudserveruser
-        password: cloudserverpassword
   application:
     name: schooldaily_client
   profiles:
-    active: ${activeprofile}
+    active: dev
+  cloud:
+      config:
+        uri: https://localhost:8440
+        username: cloudserveruser
+        password: cloudserverpassword
